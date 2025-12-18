@@ -1,0 +1,10 @@
+{
+  "cadastroValido": {
+    "usuario": "standard_user",
+    "senha": "secret_sauce"
+  },
+  "cadastroInvalido": {
+    "usuario": "test_user",
+    "senha": "secret_sauce"
+  }
+}
