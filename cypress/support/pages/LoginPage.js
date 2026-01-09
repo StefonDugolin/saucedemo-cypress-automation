@@ -1,3 +1,4 @@
+import dados from '../../fixtures/login.json';
 class LoginPage {
     visitar() {
         cy.visit('/')
@@ -13,6 +14,14 @@ class LoginPage {
 
     clicarBotaoLogin() {
         cy.get('[data-test="login-button"]').click();
+    }
+
+    loginComSucesso() {
+        this.visitar();
+        this.preencherUsuario(dados.cadastroValido.Usuario);
+        this.preencherSenha(dados.cadastroValido.senha)
+        this.clicarBotaoLogin();
+        cy.url().should('include', '/inventory.html');
     }
 }
 

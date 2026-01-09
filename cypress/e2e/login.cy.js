@@ -3,8 +3,11 @@ import dados from '../fixtures/login.json'
 
 describe('Login', () => {
 
-  it('Login com sucesso', () => {
+  beforeEach(() => {
     LoginPage.visitar();
+  });
+
+  it('Login com sucesso', () => {
     LoginPage.preencherUsuario(dados.cadastroValido.usuario);
     LoginPage.preencherSenha(dados.cadastroValido.senha);
     LoginPage.clicarBotaoLogin();
@@ -13,33 +16,30 @@ describe('Login', () => {
   });
 
   it('Usuário inválido', () => {
-    LoginPage.visitar();
     LoginPage.preencherUsuario(dados.cadastroInvalido.usuario);
     LoginPage.preencherSenha(dados.cadastroInvalido.senha);
     LoginPage.clicarBotaoLogin();
 
     cy.contains(
-    'Epic sadface: Username and password do not match any user in this service'
-  ).should('be.visible');
+      'Epic sadface: Username and password do not match any user in this service'
+    ).should('be.visible');
   });
 
   it('Tentar logar digitando somente a senha, sem digitar o usuario', () => {
-      LoginPage.visitar()
-      LoginPage.preencherSenha(dados.cadastroValido.senha);
-      LoginPage.clicarBotaoLogin();
+    LoginPage.preencherSenha(dados.cadastroValido.senha);
+    LoginPage.clicarBotaoLogin();
 
-      cy.contains(
-        'Epic sadface: Username is required'
-      ).should('be.visible');
+    cy.contains(
+      'Epic sadface: Username is required'
+    ).should('be.visible');
   });
 
-    it('Tentar logar digitando somente o usuário, sem digitar a senha', () => {
-      LoginPage.visitar()
-      LoginPage.preencherUsuario(dados.cadastroValido.usuario);
-      LoginPage.clicarBotaoLogin();
+  it('Tentar logar digitando somente o usuário, sem digitar a senha', () => {
+    LoginPage.preencherUsuario(dados.cadastroValido.usuario);
+    LoginPage.clicarBotaoLogin();
 
-      cy.contains(
-        'Epic sadface: Password is required'
-      ).should('be.visible');
+    cy.contains(
+      'Epic sadface: Password is required'
+    ).should('be.visible');
   });
-})
+});
